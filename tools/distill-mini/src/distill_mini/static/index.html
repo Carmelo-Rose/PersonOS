@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PersonOS Distill Mini</title>
+    <link rel="stylesheet" href="/static/app.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">P</div>
+        <strong>PersonOS Distill Mini</strong>
+        <span class="mode-tag">本地模式</span>
+      </div>
+      <div class="toolbar">
+        <span id="connection" class="connection">检查 OpenAI...</span>
+        <button class="button" id="add-toggle">添加问题</button>
+        <button class="button button-accent" id="run-student">批量运行 Student</button>
+        <button class="button" id="run-compare">批量运行对比</button>
+        <a class="button" href="/api/export-sft" download>导出 SFT</a>
+      </div>
+    </header>
+
+    <section class="composer" id="composer" hidden>
+      <label for="new-question">添加测试问题</label>
+      <textarea id="new-question" rows="3" placeholder="输入问题，保存后进入 Inputs 阶段"></textarea>
+      <div class="composer-actions">
+        <button class="button" id="cancel-add">取消</button>
+        <button class="button button-dark" id="save-question">保存问题</button>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <section class="board" id="board" aria-label="蒸馏流水线"></section>
+      <aside class="drawer" id="drawer" aria-label="问题详情" hidden>
+        <div class="drawer-header">
+          <div>
+            <span class="eyebrow" id="drawer-id"></span>
+            <h2 id="drawer-title"></h2>
+          </div>
+          <button class="text-button" id="close-drawer">关闭</button>
+        </div>
+
+        <section class="drawer-section">
+          <div class="section-heading">
+            <h3>问题</h3>
+          </div>
+          <p class="question-copy" id="question-copy"></p>
+        </section>
+
+        <section class="drawer-section">
+          <div class="section-heading">
+            <h3>教师答案</h3>
+            <span class="status-dot status-teacher">手动录入</span>
+          </div>
+          <textarea id="teacher-output" rows="10" placeholder="在这里录入 Teacher output"></textarea>
+          <button class="button button-dark full-button" id="save-teacher">保存教师答案</button>
+        </section>
+
+        <section class="drawer-section">
+          <div class="section-heading">
+            <h3>学生输出</h3>
+            <span class="status-dot status-student" id="student-state">尚未生成</span>
+          </div>
+          <div class="output-box empty" id="student-output">运行 Student 后在这里查看输出。</div>
+          <button class="button full-button" id="run-one-student">运行当前 Student</button>
+        </section>
+
+        <section class="drawer-section">
+          <div class="section-heading">
+            <h3>评审结果</h3>
+            <span class="status-dot status-judged" id="judge-state">尚未对比</span>
+          </div>
+          <div class="judge-result" id="judge-result">
+            Teacher 和 Student 都准备好后即可运行对比。
+          </div>
+          <button class="button full-button" id="run-one-compare">运行当前对比</button>
+        </section>
+      </aside>
+    </main>
+
+    <div class="toast" id="toast" hidden></div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
