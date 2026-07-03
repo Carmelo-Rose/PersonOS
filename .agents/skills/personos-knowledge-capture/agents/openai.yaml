@@ -1,0 +1,4 @@
+interface:
+  display_name: "PersonOS 知识采集"
+  short_description: "采集方法原则工具用法到 PersonOS 知识库资产"
+  default_prompt: "Use $personos-knowledge-capture to capture reusable knowledge into PersonOS."

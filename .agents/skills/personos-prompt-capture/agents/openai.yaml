@@ -1,0 +1,4 @@
+interface:
+  display_name: "PersonOS 提示词采集"
+  short_description: "采集提示词版本用法结果到 PersonOS 资产库"
+  default_prompt: "Use $personos-prompt-capture to capture a reusable prompt into PersonOS."

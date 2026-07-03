@@ -1,0 +1,4 @@
+interface:
+  display_name: "PersonOS 器官采集"
+  short_description: "采集判断规则评分标准边界评测样本到 PersonOS"
+  default_prompt: "Use $personos-organ-capture to capture a stable judgment rule or eval case into PersonOS."

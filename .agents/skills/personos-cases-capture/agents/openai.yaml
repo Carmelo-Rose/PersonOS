@@ -1,0 +1,4 @@
+interface:
+  display_name: "PersonOS 真实案例采集"
+  short_description: "采集、更新或关联一条经过确认的 PersonOS 真实案例"
+  default_prompt: "Use $personos-cases-capture to capture or update one real PersonOS case."
