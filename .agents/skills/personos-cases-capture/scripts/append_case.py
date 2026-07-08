@@ -13,7 +13,17 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_ROOT = Path("/Users/zhuanzmima0000/Documents/PersonOS")
+def resolve_default_root() -> Path:
+    env_root = os.environ.get("PERSONOS_ROOT", "").strip()
+    if env_root:
+        return Path(env_root).expanduser()
+    windows_root = Path(r"D:\workspace\PersonOS")
+    if os.name == "nt" and windows_root.exists():
+        return windows_root
+    return Path.home() / "Documents" / "PersonOS"
+
+
+DEFAULT_ROOT = resolve_default_root()
 TYPE_CONFIG = {
     "decision": (
         "decision_cases.jsonl",

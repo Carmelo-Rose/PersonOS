@@ -8,7 +8,8 @@ description: Capture reusable prompts into PersonOS 05_prompts from conversation
 Capture one reusable prompt asset at a time into `05_prompts/<category>/<slug>.md`.
 
 Default PersonOS root:
-`/Users/zhuanzmima0000/Documents/PersonOS`
+`PERSONOS_ROOT` if set; otherwise use a platform-aware local default:
+`D:\workspace\PersonOS` on Windows when that directory exists, else `~/Documents/PersonOS`
 
 Read [references/prompt-schema.md](references/prompt-schema.md) before drafting or writing.
 
@@ -98,7 +99,7 @@ Create a temporary JSON object with the confirmed fields. For new entries:
 ```bash
 python3 /Users/zhuanzmima0000/.codex/skills/personos-prompt-capture/scripts/write_prompt.py \
   --input <confirmed-object.json> \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 For updates, pass the exact destination:
@@ -107,7 +108,7 @@ For updates, pass the exact destination:
 python3 /Users/zhuanzmima0000/.codex/skills/personos-prompt-capture/scripts/write_prompt.py \
   --input <confirmed-object.json> \
   --path 05_prompts/<category>/<slug>.md \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 If this skill is installed in another Agent, use that Agent's local

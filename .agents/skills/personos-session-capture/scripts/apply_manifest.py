@@ -16,7 +16,7 @@ Manifest shape (JSON):
 
 {
   "schema_version": "1",
-  "root": "/Users/zhuanzmima0000/Documents/PersonOS",   # optional; --root wins
+  "root": "/path/to/PersonOS",   # optional; --root wins
   "items": [
     {
       "id": "item-1",                 # optional label for reporting
@@ -50,7 +50,17 @@ from pathlib import Path
 from typing import Any
 
 
-DEFAULT_ROOT = Path("/Users/zhuanzmima0000/Documents/PersonOS")
+def resolve_default_root() -> Path:
+    env_root = os.environ.get("PERSONOS_ROOT", "").strip()
+    if env_root:
+        return Path(env_root).expanduser()
+    windows_root = Path(r"D:\workspace\PersonOS")
+    if os.name == "nt" and windows_root.exists():
+        return windows_root
+    return Path.home() / "Documents" / "PersonOS"
+
+
+DEFAULT_ROOT = resolve_default_root()
 SKILLS_DIR = Path(__file__).resolve().parent.parent.parent
 GROUPS = {"cases", "knowledge", "prompt", "organ"}
 OPERATIONS = {"create", "update"}

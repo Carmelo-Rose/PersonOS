@@ -11,7 +11,8 @@ items deterministically — each frozen item is dispatched to a specialist write
 model never re-derives content at write time. That determinism is what prevents capture drift.
 
 Default PersonOS root:
-`/Users/zhuanzmima0000/Documents/PersonOS`
+`PERSONOS_ROOT` if set; otherwise use a platform-aware local default:
+`D:\workspace\PersonOS` on Windows when that directory exists, else `~/Documents/PersonOS`
 
 ## Two Capture Paths
 
@@ -45,6 +46,11 @@ may appear only as background, evidence, or results.
   generated artifacts, and unrelated private data.
 - `00_profile` is candidate-only. Never write a profile entry from a session; one session is
   evidence, not proof of a stable trait.
+- When a session shows both a reusable technical fact and a distinct pattern in how the user
+  personally engaged with it (a recurring way of asking for explanations, verifying claims, or
+  reaching a decision), extract them as two separate candidates. Do not fold the user's
+  behavioral/learning-style signal into the technical knowledge candidate — technical content
+  stays in its natural group, the behavioral signal becomes its own `00_profile` candidate.
 - Before drafting any item, mentally remove agent and tool names. If the user's action,
   judgment, and lesson are no longer clear, rewrite the draft or drop the candidate.
 - Do not force a capture from a session with no meaningful user action, reusable knowledge,
@@ -135,7 +141,7 @@ For confirmed items only, build a frozen manifest JSON in a temporary file, matc
 ```json
 {
   "schema_version": "1",
-  "root": "/Users/zhuanzmima0000/Documents/PersonOS",
+  "root": "/path/to/PersonOS",
   "items": [
     {
       "id": "item-1",
@@ -171,7 +177,7 @@ Run once. Optionally pass `--dry-run` first to preflight every item; all four gr
 ```bash
 python3 ~/.codex/skills/personos-session-capture/scripts/apply_manifest.py \
   --manifest <frozen-manifest.json> \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 If this skill is installed in another agent, use that agent's local

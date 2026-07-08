@@ -10,7 +10,8 @@ evidence as the subject of the interview; do not begin with broad questions abou
 personality or preferences.
 
 Default PersonOS root:
-`/Users/zhuanzmima0000/Documents/PersonOS`
+`PERSONOS_ROOT` if set; otherwise use a platform-aware local default:
+`D:\workspace\PersonOS` on Windows when that directory exists, else `~/Documents/PersonOS`
 
 Read [references/case-schemas.md](references/case-schemas.md) before drafting or writing a
 case.
@@ -50,7 +51,7 @@ For an existing case follow-up, run:
 
 ```bash
 python3 ~/.codex/skills/personos-cases-capture/scripts/find_cases.py \
-  --root /Users/zhuanzmima0000/Documents/PersonOS \
+  --root <your PersonOS root> \
   --project "<project name>" --pending
 ```
 
@@ -153,7 +154,7 @@ fields except `编号`. Include `关联案例` for a related-new case. Run:
 python3 ~/.codex/skills/personos-cases-capture/scripts/append_case.py \
   --type <project|decision|failure|success> \
   --input <confirmed-object.json> \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 The script validates the full destination JSONL before making an atomic append and generates
@@ -167,7 +168,7 @@ record except `编号`. Run:
 python3 ~/.codex/skills/personos-cases-capture/scripts/update_case.py \
   --id <exact-case-id> \
   --input <confirmed-replacement-object.json> \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 Never update with a partial object. Present every changed field and unresolved-item change in

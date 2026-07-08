@@ -8,7 +8,8 @@ description: Capture stable PersonOS judgment assets into 02_organs, including d
 Capture one judgment asset at a time into `02_organs/<organ>/`.
 
 Default PersonOS root:
-`/Users/zhuanzmima0000/Documents/PersonOS`
+`PERSONOS_ROOT` if set; otherwise use a platform-aware local default:
+`D:\workspace\PersonOS` on Windows when that directory exists, else `~/Documents/PersonOS`
 
 Read [references/organ-schema.md](references/organ-schema.md) before drafting or writing.
 
@@ -112,7 +113,7 @@ Create a temporary JSON object with the confirmed fields. Run:
 ```bash
 python3 /Users/zhuanzmima0000/.codex/skills/personos-organ-capture/scripts/write_organ.py \
   --input <confirmed-object.json> \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 If this skill is installed in another Agent, use that Agent's local

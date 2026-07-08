@@ -8,7 +8,8 @@ description: Capture reusable PersonOS knowledge into 03_knowledge from conversa
 Capture one reusable knowledge asset at a time into `03_knowledge/<domain>/<slug>.md`.
 
 Default PersonOS root:
-`/Users/zhuanzmima0000/Documents/PersonOS`
+`PERSONOS_ROOT` if set; otherwise use a platform-aware local default:
+`D:\workspace\PersonOS` on Windows when that directory exists, else `~/Documents/PersonOS`
 
 Read [references/knowledge-schema.md](references/knowledge-schema.md) before drafting or writing.
 
@@ -97,7 +98,7 @@ Create a temporary JSON object with the confirmed fields. For new entries:
 ```bash
 python3 /Users/zhuanzmima0000/.codex/skills/personos-knowledge-capture/scripts/write_knowledge.py \
   --input <confirmed-object.json> \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 For updates, pass the exact destination:
@@ -106,7 +107,7 @@ For updates, pass the exact destination:
 python3 /Users/zhuanzmima0000/.codex/skills/personos-knowledge-capture/scripts/write_knowledge.py \
   --input <confirmed-object.json> \
   --path 03_knowledge/<domain>/<slug>.md \
-  --root /Users/zhuanzmima0000/Documents/PersonOS
+  --root <your PersonOS root>
 ```
 
 If this skill is installed in another Agent, use that Agent's local
