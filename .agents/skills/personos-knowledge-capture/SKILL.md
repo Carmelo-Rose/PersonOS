@@ -96,7 +96,7 @@ If the user chooses `修改`, revise and present the readable draft again. If th
 Create a temporary JSON object with the confirmed fields. For new entries:
 
 ```bash
-python3 /Users/zhuanzmima0000/.codex/skills/personos-knowledge-capture/scripts/write_knowledge.py \
+python3 ~/.codex/skills/personos-knowledge-capture/scripts/write_knowledge.py \
   --input <confirmed-object.json> \
   --root <your PersonOS root>
 ```
@@ -104,7 +104,7 @@ python3 /Users/zhuanzmima0000/.codex/skills/personos-knowledge-capture/scripts/w
 For updates, pass the exact destination:
 
 ```bash
-python3 /Users/zhuanzmima0000/.codex/skills/personos-knowledge-capture/scripts/write_knowledge.py \
+python3 ~/.codex/skills/personos-knowledge-capture/scripts/write_knowledge.py \
   --input <confirmed-object.json> \
   --path 03_knowledge/<domain>/<slug>.md \
   --root <your PersonOS root>

@@ -111,7 +111,7 @@ If the user chooses `修改`, revise and present the readable draft again. If th
 Create a temporary JSON object with the confirmed fields. Run:
 
 ```bash
-python3 /Users/zhuanzmima0000/.codex/skills/personos-organ-capture/scripts/write_organ.py \
+python3 ~/.codex/skills/personos-organ-capture/scripts/write_organ.py \
   --input <confirmed-object.json> \
   --root <your PersonOS root>
 ```
