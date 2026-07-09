@@ -2,50 +2,45 @@
 
 ## 元数据
 
-- 状态：待验证
+- 状态：已验证
 - 类型：术语
 - 领域：frontend
-- 最后更新：2026-06-24
-- 标签：前端交互, 术语, CSS mask, 动效, reveal
+- 最后更新：2026-07-05
+- 标签：前端交互, 术语, reveal, ink reveal, CSS mask, 动效
 
 ## 用户动作/判断来源
 
-- 用户在探索前端隐藏层揭示效果时，只知道视觉效果描述（鼠标小圆区域移动时临时显示隐藏背景），不知道正确术语
-- 用户问 ChatGPT 查询正确叫法，GPT 给出术语体系和参考网站
-- 用户明确拒绝 scratch/scrap 方向，接受 Cursor Mask Reveal 术语
+- 用户在同一会话中先确认 progressive disclosure 是否为业内常用词，再转向前端 reveal 动效命名。
+- 用户追问 ink reveal 的中文是否有固定叫法，并要求区分英文名称与中文描述之间的边界。
+- 用户确认英文叫法可直接保留，但需要中文侧更自然的表达与近义词区分。
 
 ## 适用条件
 
-- 需要实现鼠标移动临时揭示隐藏背景的前端交互效果
-- 需要搜索参考案例或 Awwwords 上的同类效果
-- 需要与前端开发者或 AI 编码工具沟通此类效果的准确需求
+- 需要为鼠标揭示、墨迹显影、遮罩显隐类前端动效命名时。
+- 需要在设计稿、组件名、方案文档或与 AI 编码工具沟通时使用更准确术语时。
+- 需要区分 reveal 效果是临时显现、永久擦除还是扭曲位移时。
 
 ## 核心内容
 
-正确术语体系：Cursor Mask Reveal / Mouse Pointer Mask Reveal / Background Revealing Cursor / Spotlight Cursor Reveal / Mask Cursor Effect。
-错误方向术语（不要使用）：Scratch Reveal / Displacement Scratch / Permanent Reveal。
-核心交互定义：鼠标有一个小圆形区域 → 鼠标移动到哪里 → 哪里临时显示隐藏背景 → 移走后继续隐藏（非永久擦除）。
-参考案例网站：
-1. Creative Nights — Mouse pointer mask reveal（Awwwords，WebGL + reactive cursor）
-2. Minh Pham — Mask cursor（Awwwords，经典 mask cursor portfolio）
-3. Background Revealing Cursor（Awwwords，cursor/interactive/reveal/fade）
-4. Hover Trails and Mask Reveal on Cursor Move（动态轨迹 + 遮罩揭示）
-5. Framer Cursor Mask Reveal Component（产品化组件，遮罩穿透前景图显示背景图）
+- Cursor Mask Reveal 适用于鼠标移动到哪里，哪里临时显示隐藏层，移开后继续隐藏的稳定透镜式显隐。
+- Ink Reveal 更像描述性命名，不是高度标准化术语；中文可用“墨迹揭示动效”或“墨迹显现效果”，不必强行固定成“短暂墨迹揭示”。
+- 如果效果更像一团墨迹扫过后露出内容，可用 ink wipe；更像笔刷边缘时用 brush reveal；更像涂抹拖开时用 smudge reveal；更像刮开时用 scratch reveal。
+- 术语命名应优先抓交互行为和视觉材质，不要只按中文直译或代码实现命名。
 
 ## 边界与例外
 
-- 仅适用于临时揭示类效果，不适用于永久擦除（刮刮乐）场景
-- 参考网站链接需实测确认是否仍可访问
+- 不要把 ink reveal 当成严格标准术语；它更多是团队沟通和案例搜索的描述性名字。
+- 不要把 cursor reveal、mask reveal、scratch reveal 混成一类；它们对应的交互行为不同。
+- 中文命名可以服务沟通，但技术实现判断仍应回到 CSS mask、Canvas 2D 或 WebGL 的能力边界。
 
 ## 失效风险
 
-术语本身稳定，但参考网站链接可能失效
+低。术语体系本身较稳定，但团队内部中文译法可能继续变化。
 
 ## 关联项
 
-- 无
+- 03_knowledge/frontend/css-mask-vs-webgl-shader-reveal.md
 
 ## 待确认或待验证
 
-- 参考网站链接未实测确认可访问性
-- CSS Mask 版 demo 已跑通，术语体系在实际开发中被确认正确
+- 不同设计团队对 ink reveal 的中文译法可能仍会继续分化。
