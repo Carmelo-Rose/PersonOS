@@ -1,0 +1,4 @@
+interface:
+  display_name: "PersonOS 画像升格"
+  short_description: "多案例支撑后把稳定偏好/反模式升格进 00_profile"
+  default_prompt: "Use $personos-profile-promote to promote well-supported traits from accumulated cases into 00_profile."

@@ -80,8 +80,23 @@ List every meaningful capture object — not just one — and assign each a targ
 - **`00_profile`** (candidate only): possible stable preferences, anti-patterns, ability
   boundaries, or background facts. Never written here.
 
-When a concrete event and a reusable principle both exist, default to a `04_cases` event unless
-the user explicitly wants the principle, prompt, or rule itself saved.
+When a concrete event and a reusable principle both exist, default the **primary** object to a
+`04_cases` event unless the user explicitly wants the principle, prompt, or rule itself saved.
+The event default decides only which object is primary; it must never absorb a judgment or
+preference signal that deserves its own candidate. Apply these two mandatory-surfacing rules so
+the increment side never silently loses rules or profile signals to the case default:
+
+- **Judgment signal → mandatory `02_organs` candidate.** If the session contains a correction, a
+  quality/safety/approval boundary, a rejected option with a stated reason, or a judgment the
+  user made in this (or an equivalent earlier) case, you MUST list a `02_organs` candidate
+  (rule / rubric / boundary) in addition to the case — never fold it into the case. Mark it
+  `新增` or `更新<既有规则>`; if it restates an existing organ rule, prefer `更新` and cite the
+  case as new evidence. Set confidence by support: a single correction → `待验证`, 低/中;
+  repeated across cases → higher. This candidate is surfaced even though the primary stays a case.
+- **Stable-preference signal → mandatory `00_profile` candidate.** If the session shows a
+  recurring preference, anti-pattern, ability boundary, or working-style trait, you MUST list a
+  `00_profile` candidate (still candidate-only, never written from a session). Note whether other
+  cases already support it, so the user can see when it is close to promotable.
 
 ### 3. Deduplicate — Decide New Versus Update Deterministically
 

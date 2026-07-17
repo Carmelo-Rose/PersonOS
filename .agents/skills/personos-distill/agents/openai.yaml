@@ -1,0 +1,4 @@
+interface:
+  display_name: "PersonOS 案例蒸馏"
+  short_description: "把累积的 04_cases 提炼成 02_organs 规则与 06_eval 评测，并打通溯源"
+  default_prompt: "Use $personos-distill to scan accumulated cases and propose organ rules and eval cases with case traceability."
