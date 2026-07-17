@@ -1,4 +1,0 @@
-interface:
-  display_name: "PersonOS 会话捕获"
-  short_description: "整理当前上下文并调度 PersonOS 专项采集流程"
-  default_prompt: "Use $personos-session-capture to capture this conversation into the right PersonOS group."
