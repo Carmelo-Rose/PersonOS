@@ -11,6 +11,7 @@ from append_case import (
     DEFAULT_ROOT,
     TYPE_CONFIG,
     CaseError,
+    apply_decision_lifecycle,
     atomic_append,
     load_json_object,
     load_jsonl,
@@ -46,6 +47,13 @@ def main() -> int:
         raise CaseError("只允许更新真实案例")
     replacement = load_json_object(args.input)
     validate_case(case_type, replacement)
+    if case_type == "decision":
+        # 更新决策时保留生命周期字段；若替换对象省略，则沿用原记录的值
+        old = records[index]
+        replacement.setdefault("决策状态", old.get("决策状态", "现行"))
+        replacement.setdefault("取代", old.get("取代", ""))
+        replacement.setdefault("被取代", old.get("被取代", ""))
+        replacement = apply_decision_lifecycle(replacement)
     replacement = {"编号": args.case_id, **replacement}
     records[index] = replacement
     result = {"编号": args.case_id, "操作": "更新", "目标文件": str(destination)}

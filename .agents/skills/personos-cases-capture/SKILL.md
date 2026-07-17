@@ -128,6 +128,12 @@ Use the routing rules in the schema reference:
 When multiple types fit, choose the type containing the most useful new lesson. Mention the
 choice in the draft summary.
 
+For a `decision` case, also judge whether this decision **supersedes** an earlier decision
+(reverses or replaces a prior choice for the same concern). If so, ask the user to confirm the
+exact prior `编号`, and record it in `取代`. If the events are merely related, continued, or
+layered rather than a replacement, use `关联案例` instead of `取代`. Never infer a supersede
+link without user confirmation. See the lifecycle section in the schema reference.
+
 ### 6. Present a Readable Draft
 
 Show a concise Chinese summary with:
@@ -160,6 +166,10 @@ python3 ~/.codex/skills/personos-cases-capture/scripts/append_case.py \
 The script validates the full destination JSONL before making an atomic append and generates
 the next date-based ID. Report the generated ID and destination. Remove the temporary input
 file after the command succeeds or fails.
+
+For a `decision` that supersedes an earlier one, include `"取代": "<旧决策编号>"` in the input
+object. The script auto-marks the old decision as `已取代` and fills its `被取代` with the new
+ID; do not edit the old record by hand. Report both the new ID and the superseded ID.
 
 For an update, create a temporary JSON object containing the complete confirmed replacement
 record except `编号`. Run:

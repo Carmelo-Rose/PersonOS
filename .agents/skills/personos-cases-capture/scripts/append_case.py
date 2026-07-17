@@ -44,6 +44,30 @@ TYPE_CONFIG = {
 }
 COMMON_REQUIRED = ["状态", "发生日期", "项目", "证据来源", "待验证项", "标签"]
 ALLOWED_STATUSES = {"真实/已验证", "真实/待验证"}
+# 决策生命周期轴（与可信度轴“状态”正交）
+ALLOWED_DECISION_STATES = {"现行", "已取代", "已废弃", "提议中"}
+DECISION_LIFECYCLE_FIELDS = ("决策状态", "取代", "被取代")
+
+
+def apply_decision_lifecycle(record: dict[str, Any]) -> dict[str, Any]:
+    """确保 decision 记录带有生命周期字段，并置于“状态”之后。缺省 决策状态=现行、指针为空串。"""
+    state = record.get("决策状态", "现行")
+    supersedes = str(record.get("取代", "") or "").strip()
+    superseded_by = str(record.get("被取代", "") or "").strip()
+    rebuilt: dict[str, Any] = {}
+    for key, value in record.items():
+        if key in DECISION_LIFECYCLE_FIELDS:
+            continue
+        rebuilt[key] = value
+        if key == "状态":
+            rebuilt["决策状态"] = state
+            rebuilt["取代"] = supersedes
+            rebuilt["被取代"] = superseded_by
+    if "决策状态" not in rebuilt:
+        rebuilt["决策状态"] = state
+        rebuilt["取代"] = supersedes
+        rebuilt["被取代"] = superseded_by
+    return rebuilt
 
 
 class CaseError(ValueError):
@@ -98,6 +122,13 @@ def validate_case(case_type: str, record: dict[str, Any]) -> None:
         raise CaseError("真实案例标签不得包含“示例”")
     if record["状态"] == "真实/已验证" and record["待验证项"]:
         raise CaseError("“真实/已验证”案例的“待验证项”必须为空")
+    if case_type == "decision":
+        state = record.get("决策状态", "现行")
+        if state not in ALLOWED_DECISION_STATES:
+            raise CaseError("决策状态必须是：现行 / 已取代 / 已废弃 / 提议中")
+        for field in ("取代", "被取代"):
+            if field in record and not isinstance(record[field], str):
+                raise CaseError(f"“{field}”必须是字符串（决策编号或空串）")
 
 
 def next_id(case_type: str, records: list[dict[str, Any]], id_date: str) -> str:
@@ -158,8 +189,22 @@ def main() -> int:
     record = load_json_object(args.input)
     validate_case(args.case_type, record)
     records = load_jsonl(destination)
-    record = {"编号": next_id(args.case_type, records, args.id_date), **record}
-    result = {"编号": record["编号"], "目标文件": str(destination)}
+    new_id = next_id(args.case_type, records, args.id_date)
+    result = {"编号": new_id, "目标文件": str(destination)}
+    if args.case_type == "decision":
+        record = apply_decision_lifecycle(record)
+        supersedes = record["取代"].strip()
+        if supersedes:
+            targets = [r for r in records if r.get("编号") == supersedes]
+            if not targets:
+                raise CaseError(f"“取代”指向的决策不存在：{supersedes}")
+            target = targets[0]
+            record["取代"] = supersedes
+            target["决策状态"] = "已取代"
+            target["被取代"] = new_id
+            result["取代"] = supersedes
+            result["旧决策已标记"] = "已取代"
+    record = {"编号": new_id, **record}
     if args.dry_run:
         result["dry_run"] = True
     else:
